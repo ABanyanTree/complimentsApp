@@ -1,0 +1,10 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/Likekero/.vs/Likekero/v16
+/Likekero/Likekero/obj
+/Likekero/Likekero.Android/obj
+/Likekero/Likekero.iOS/obj
+/Likekero/Likekero.UWP/obj
