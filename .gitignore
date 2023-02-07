@@ -8,3 +8,7 @@
 /Likekero/Likekero.Android/obj
 /Likekero/Likekero.iOS/obj
 /Likekero/Likekero.UWP/obj
+/Likekero/Likekero/bin/Debug/netstandard2.0
+/Likekero/Likekero.Android/bin/Debug
+/Likekero/Likekero.iOS/bin/iPhoneSimulator/Debug
+/Likekero/Likekero.UWP/bin/x86/Debug

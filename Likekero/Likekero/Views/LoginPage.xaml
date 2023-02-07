@@ -11,4 +11,4 @@
             <Button VerticalOptions="Center" Text="Login" Command="{Binding LoginCommand}"/>
         </StackLayout>
     </ContentPage.Content>
-</ContentPage>A
+</ContentPage>
