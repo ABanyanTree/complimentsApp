@@ -1,8 +1,5 @@
 ﻿using Likekero.Services;
-using Likekero.Views;
-using System;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace Likekero
 {

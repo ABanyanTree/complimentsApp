@@ -6,16 +6,25 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Resources\Container\**" />
+    <Compile Remove="Resources\Manager\**" />
+    <EmbeddedResource Remove="Resources\Container\**" />
+    <EmbeddedResource Remove="Resources\Manager\**" />
+    <None Remove="Resources\Container\**" />
+    <None Remove="Resources\Manager\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Services\ILocalize.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />  
     <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Components\" />
     <Folder Include="Behavior\" />
-    <Folder Include="Converters\" />
-    <Folder Include="CustomControls\" />
-    <Folder Include="CustomRenderers\" />
     <Folder Include="ViewModels\Account\" />
     <Folder Include="ViewModels\Dashboard\" />
     <Folder Include="Views\Account\" />
@@ -23,6 +32,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Resources\Strings.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Strings.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\Strings.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Update="Styles\Colors.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
