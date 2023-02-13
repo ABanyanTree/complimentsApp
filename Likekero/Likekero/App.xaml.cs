@@ -1,4 +1,5 @@
 ﻿using Likekero.Services;
+using Likekero.Views.Login;
 using Xamarin.Forms;
 
 namespace Likekero
@@ -11,7 +12,7 @@ namespace Likekero
             InitializeComponent();
 
             DependencyService.Register<MockDataStore>();
-            MainPage = new AppShell();
+            MainPage = new NavigationPage(new SignIn());
         }
 
         protected override void OnStart()

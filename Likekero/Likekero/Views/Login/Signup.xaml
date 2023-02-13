@@ -1,0 +1,178 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:converters="clr-namespace:Likekero.Converters"
+             x:Class="Likekero.Views.Signup"
+             NavigationPage.HasBackButton="True"
+             BackgroundColor="White">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:FirstValidationErrorConverter x:Key="ErrorConverter" />
+            <converters:StringNullOrEmptyBoolConverter x:Key="StringNullOrEmptyBoolConverter" />
+            <converters:InverseBoolConverter x:Key="InvertedBoolConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="7*"/>
+            </Grid.RowDefinitions>
+                <Image Grid.Row="0" Source="signup1.png" BackgroundColor="Transparent" VerticalOptions="Start"/>
+                <ScrollView Grid.Row="1">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="8*"/>
+                            <RowDefinition Height="2*"/>
+                        </Grid.RowDefinitions>
+                        <StackLayout Grid.Row="0"  Margin="10,0">
+                        <Label Text="Sign up" FontSize="30" TextColor="DarkSlateGray" FontAttributes="Bold"/>
+                            <StackLayout x:Name="FirstNameSection" HorizontalOptions="Fill">
+                                <Grid RowSpacing="0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="30"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Image Grid.Row="0" Grid.Column="0" Source="ic_user_gray.png" WidthRequest="40"/>
+                                    <Entry Grid.Row="0" Grid.Column="1" x:Name="FirstNameEntry" Placeholder="First Name" 
+                                                   Text="{Binding FirstName.Value}" TextChanged="Entry_TextChanged" 
+                                                   HorizontalOptions="FillAndExpand">
+                                        <!--<Entry.Triggers>
+                                                    <DataTrigger TargetType="Entry" Binding="{Binding FirstName.IsValid}" Value="False">
+                                                        <Setter Property="PlaceholderColor" Value="Red"/>
+                                                    </DataTrigger>
+                                                </Entry.Triggers>-->
+                                    </Entry>
+                                    <Label Grid.Row="1" Grid.Column="1" 
+                                                       IsVisible="{Binding FirstName.IsValid, Converter={StaticResource InvertedBoolConverter}}"
+                                                       Text="{Binding FirstName.Errors, Converter={StaticResource ErrorConverter}}" 
+                                                       FontSize="12" HorizontalOptions="Start"
+                                                   VerticalOptions="Start" TextColor="Red"/>
+                                </Grid>
+                            </StackLayout>
+
+                            <StackLayout x:Name="LastNameSection">
+                                <Grid RowSpacing="0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="30"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Image Grid.Row="0" Grid.Column="0" Source="ic_user_gray.png"  WidthRequest="40"/>
+                                    <Entry Grid.Row="0" Grid.Column="1" x:Name="LastNameEntry" Placeholder="Last Name" Text="{Binding LastName.Value}" TextChanged="Entry_TextChanged" HorizontalOptions="FillAndExpand">
+                                    </Entry>
+                                    <Label Grid.Row="1" Grid.Column="1" 
+                                                       IsVisible="{Binding LastName.IsValid, Converter={StaticResource InvertedBoolConverter}}"
+                                                       Text="{Binding LastName.Errors, Converter={StaticResource ErrorConverter}}" 
+                                                       TextColor="Red" FontSize="10"/>
+                                </Grid>
+                            </StackLayout>
+
+                            <StackLayout x:Name="EmailSection">
+                                <Grid RowSpacing="0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="30"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Image Grid.Row="0" Grid.Column="0" Source="ic_mail_gray.png"  WidthRequest="40"/>
+                                    <Entry Grid.Row="0" Grid.Column="1" x:Name="EmailEntry" Placeholder="Email" Text="{Binding Email.Value}"
+                                                       TextChanged="Entry_TextChanged" 
+                                                       Keyboard="Email" HorizontalOptions="FillAndExpand">
+                                    </Entry>
+                                    <Label Grid.Row="1" Grid.Column="1"
+                                                       IsVisible="{Binding Email.IsValid, Converter={StaticResource InvertedBoolConverter}}"
+                                                       Text="{Binding Email.Errors, Converter={StaticResource ErrorConverter}}" 
+                                                       TextColor="Red" FontSize="10"/>
+                                </Grid>
+                            </StackLayout>
+
+                            <StackLayout x:Name="PasswordSection">
+                                <Grid RowSpacing="0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="30"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Image Grid.Row="0" Grid.Column="0" Source="ic_password_gray.png"  WidthRequest="40"/>
+                                    <Entry Grid.Row="0" Grid.Column="1" x:Name="PasswordEntry" IsPassword="True" Placeholder="********" Text="{Binding Password.Value}" TextChanged="Entry_TextChanged" HorizontalOptions="FillAndExpand">
+                                    </Entry>
+                                    <Label Grid.Row="1" Grid.Column="1" 
+                                                       IsVisible="{Binding Password.IsValid, Converter={StaticResource InvertedBoolConverter}}"
+                                                       Text="{Binding Password.Errors, Converter={StaticResource ErrorConverter}}" 
+                                                       TextColor="Red" FontSize="10"/>
+                                </Grid>
+                            </StackLayout>
+
+                            <StackLayout x:Name="Above14Section" Orientation="Horizontal" Margin="0,10,0,0">
+                                <CheckBox x:Name="Above14Checkbox" Color="DeepSkyBlue" IsChecked="{Binding Over14}"/>
+                                <Label Text="I am over 14 years old" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+                            </StackLayout>
+
+                            <StackLayout x:Name="TermsSection" Orientation="Horizontal">
+                                <CheckBox x:Name="TermsCheckbox" Color="DeepSkyBlue" IsChecked="{Binding TermsAndConditions}"/>
+                                <Label Text="By signing up, you agree to our Terms and Conditions and Privacy Policy" HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <FormattedString.Spans>
+                                                <Span Text="By signing up, you agree to our "/>
+                                                <Span Text="Terms &amp; Conditions" TextColor="DeepSkyBlue" />
+                                                <Span Text=" and " />
+                                                <Span Text="Privacy Policy" TextColor="DeepSkyBlue"/>
+                                            </FormattedString.Spans>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                            </StackLayout>
+                        </StackLayout>
+                        <StackLayout Grid.Row="1">
+                            <Button x:Name="SignUpButton" Text="Continue" TextTransform="None" FontSize="16"
+                                            Command="{Binding SignUpCommand}" 
+                                            BackgroundColor="LightGray"
+                                            IsEnabled="False" TextColor="White"
+                                            Margin="15,0" CornerRadius="10" >
+                                <Button.Triggers>
+                                    <MultiTrigger TargetType="Button" >
+                                        <MultiTrigger.Conditions>
+                                            <BindingCondition Binding="{Binding TermsAndConditions}" Value="True"/>
+                                            <BindingCondition Binding="{Binding Over14}" Value="True"/>
+                                        </MultiTrigger.Conditions>
+                                        <Setter Property="IsEnabled" Value="True"/>
+                                        <Setter Property="BackgroundColor" Value="DeepSkyBlue"/>
+                                    </MultiTrigger>
+                                </Button.Triggers>
+                            </Button>
+
+                            <Label Text="Joined us before? Login" HorizontalOptions="Center">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <FormattedString.Spans>
+                                            <Span Text="Joined us before? "/>
+                                        <Span Text="Login" TextColor="DeepSkyBlue" >
+                                            <Span.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                                            </Span.GestureRecognizers>
+                                        </Span>
+                                    </FormattedString.Spans>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                        </StackLayout>
+                    </Grid>
+                </ScrollView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
