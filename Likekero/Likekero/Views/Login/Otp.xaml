@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<d:ViewBase  xmlns:d="clr-namespace:Likekero.Views.Common"
+             xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Likekero.Views.LoginOtp"
-             NavigationPage.HasBackButton="True"
-             BackgroundColor="White">
+             x:Class="Likekero.Views.Otp"
+             NavigationPage.HasBackButton="True">
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
@@ -21,21 +21,22 @@
                         <Label Text="Enter OTP" FontSize="30" TextColor="DarkSlateGray" FontAttributes="Bold"/>
                         <Label Text="A 4 digit code has been sent to your email." FontSize="18" TextColor="Black"/>
                         <StackLayout x:Name="EmailSection" Margin="0,10" Orientation="Horizontal" HorizontalOptions="Center">
-                            <Entry x:Name="entry1" AutomationId="entry1" WidthRequest="40" Keyboard="Numeric" MaxLength="1" ReturnType="Next" HorizontalTextAlignment="Center" TextChanged="OnTextChanged"/>
-                            <Entry x:Name="entry2" AutomationId="entry2" WidthRequest="40" Keyboard="Numeric" MaxLength="1" ReturnType="Next" HorizontalTextAlignment="Center" TextChanged="OnTextChanged"/>
-                            <Entry x:Name="entry3" AutomationId="entry3" WidthRequest="40" Keyboard="Numeric" MaxLength="1" ReturnType="Next" HorizontalTextAlignment="Center" TextChanged="OnTextChanged"/>
-                            <Entry x:Name="entry4" AutomationId="entry4" WidthRequest="40" Keyboard="Numeric" MaxLength="1" ReturnType="Done" HorizontalTextAlignment="Center"/>
+                            <Entry x:Name="entry1" AutomationId="entry1" Text="{Binding OTP1}" WidthRequest="40" Keyboard="Numeric" MaxLength="1" ReturnType="Next" HorizontalTextAlignment="Center" TextChanged="OnTextChanged"/>
+                            <Entry x:Name="entry2" AutomationId="entry2" Text="{Binding OTP2}" WidthRequest="40" Keyboard="Numeric" MaxLength="1" ReturnType="Next" HorizontalTextAlignment="Center" TextChanged="OnTextChanged"/>
+                            <Entry x:Name="entry3" AutomationId="entry3" Text="{Binding OTP3}" WidthRequest="40" Keyboard="Numeric" MaxLength="1" ReturnType="Next" HorizontalTextAlignment="Center" TextChanged="OnTextChanged"/>
+                            <Entry x:Name="entry4" AutomationId="entry4" Text="{Binding OTP4}" WidthRequest="40" Keyboard="Numeric" MaxLength="1" ReturnType="Done" HorizontalTextAlignment="Center"/>
                         </StackLayout>
+                        <Label Text="{Binding ErrorMessage}" FontSize="12" TextColor="Red"/>
                     </StackLayout>
                     <StackLayout Grid.Row="1" VerticalOptions="Start">
                         <Button Text="Submit" TextTransform="None" FontSize="16"
-                                Clicked="Button_Clicked"
-                                            BackgroundColor="DeepSkyBlue" TextColor="White"
-                                            Margin="15,0" CornerRadius="10" >
+                                Command="{Binding SubmitCommand}"
+                                BackgroundColor="DeepSkyBlue" TextColor="White"
+                                Margin="15,0" CornerRadius="10" >
                         </Button>
                     </StackLayout>
                 </Grid>
             </ScrollView>
         </Grid>
     </ContentPage.Content>
-</ContentPage>
+</d:ViewBase>

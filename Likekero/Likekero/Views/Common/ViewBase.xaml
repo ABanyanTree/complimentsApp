@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Likekero.Views.Common.ViewBase"
              xmlns:styles="clr-namespace:Likekero.Styles" 
+             xmlns:converters="clr-namespace:Likekero.Converters"
              BackgroundColor="{StaticResource WhiteBackgroundColor}"
              Title="{Binding Title}">
     <ContentPage.Resources>
@@ -10,6 +11,9 @@
             <ResourceDictionary.MergedDictionaries>
                 <styles:Styles/>
             </ResourceDictionary.MergedDictionaries>
+            <converters:FirstValidationErrorConverter x:Key="ErrorConverter" />
+            <converters:StringNullOrEmptyBoolConverter x:Key="StringNullOrEmptyBoolConverter" />
+            <converters:InverseBoolConverter x:Key="InvertedBoolConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
 </ContentPage>

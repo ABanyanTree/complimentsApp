@@ -1,18 +1,20 @@
-﻿using System;
+﻿using Likekero.Navigation;
 using Likekero.ViewModels.Login;
+using Likekero.Views.Common;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace Likekero.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class LoginOtp : ContentPage
+    public partial class Otp : ViewBase
     {
-        private SignupViewModel viewModel;
-        public LoginOtp()
+        private OTPViewModel viewModel;
+        public Otp()
         {
             InitializeComponent();
-            BindingContext = viewModel = new SignupViewModel();
+            var navigationService = DependencyService.Get<INavigationService>();
+            BindingContext = viewModel = new OTPViewModel(navigationService);
         }
 
         private void OnTextChanged(object sender, TextChangedEventArgs e)
@@ -36,11 +38,6 @@ namespace Likekero.Views
                         break;
                 }
             }
-        }
-
-        private async void Button_Clicked(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new ResetPassword());
         }
     }
 }

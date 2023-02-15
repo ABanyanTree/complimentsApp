@@ -1,17 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:converters="clr-namespace:Likekero.Converters"
+<d:ViewBase  xmlns:d="clr-namespace:Likekero.Views.Common" 
+             xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:Likekero.Triggers"
              x:Class="Likekero.Views.Login.SignIn"
-             NavigationPage.HasNavigationBar="False"
-             BackgroundColor="White">
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <converters:FirstValidationErrorConverter x:Key="ErrorConverter" />
-            <converters:StringNullOrEmptyBoolConverter x:Key="StringNullOrEmptyBoolConverter" />
-            <converters:InverseBoolConverter x:Key="InvertedBoolConverter" />
-        </ResourceDictionary>
-    </ContentPage.Resources>
+             NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
@@ -44,15 +36,31 @@
                                                        TextChanged="Entry_TextChanged" 
                                                        Keyboard="Email" HorizontalOptions="FillAndExpand">
                                 </Entry>
+                                
                                 <Label Grid.Row="1" Grid.Column="1"
                                                        IsVisible="{Binding Email.IsValid, Converter={StaticResource InvertedBoolConverter}}"
                                                        Text="{Binding Email.Errors, Converter={StaticResource ErrorConverter}}" 
                                                        TextColor="Red" FontSize="10"/>
 
                                 <Image Grid.Row="2" Grid.Column="0" Source="ic_password_gray.png"  WidthRequest="40"/>
-                                <Entry Grid.Row="2" Grid.Column="1" x:Name="PasswordEntry" IsPassword="True" Placeholder="********" 
+                                <Entry Grid.Row="2" Grid.Column="1" x:Name="PasswordEntry" 
+                                       IsPassword="{Binding Source={x:Reference ShowPasswordActualTrigger}, Path=HidePassword}"
+                                       Placeholder="********" 
                                        Text="{Binding Password.Value}" TextChanged="Entry_TextChanged" HorizontalOptions="FillAndExpand">
                                 </Entry>
+                                <ImageButton Grid.Row="2" Grid.Column="1"  VerticalOptions="Center"  
+                                    Margin="0,0,10,0"  
+                                    HeightRequest="20"  
+                                    HorizontalOptions="End"  
+                                    Source="visibility_off_24.xml">
+                                    <ImageButton.Triggers>
+                                        <EventTrigger Event="Clicked">
+                                            <local:ShowPasswordTriggerAction ShowIcon="visibility_24"  
+                                                                       HideIcon="visibility_off_24"  
+                                                                       x:Name="ShowPasswordActualTrigger"/>
+                                        </EventTrigger>
+                                    </ImageButton.Triggers>
+                                </ImageButton>
                                 <Label Grid.Row="3" Grid.Column="1" 
                                                        IsVisible="{Binding Password.IsValid, Converter={StaticResource InvertedBoolConverter}}"
                                                        Text="{Binding Password.Errors, Converter={StaticResource ErrorConverter}}" 
@@ -61,13 +69,13 @@
                         </StackLayout>
                         <Label Text="Forgot Password?" TextColor="DeepSkyBlue" HorizontalOptions="End">
                             <Label.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="ForgotPassword_Tapped"/>
+                                <TapGestureRecognizer Command="{Binding ForgotPasswordCommand}"/>
                             </Label.GestureRecognizers>
                         </Label>
                     </StackLayout>
                     <StackLayout Grid.Row="1" VerticalOptions="Start" Margin="0,10">
-                        <Button x:Name="SignUpButton" Text="Login" TextTransform="None" FontSize="16"
-                                            Command="{Binding SignUpCommand}" 
+                        <Button x:Name="SigninButton" Text="Login" TextTransform="None" FontSize="16"
+                                            Command="{Binding SigninCommand}" 
                                             BackgroundColor="DeepSkyBlue" TextColor="White"
                                             Margin="15,0" CornerRadius="10" >
                         </Button>
@@ -79,7 +87,7 @@
                                         <Span Text="New to Likekero? "/>
                                         <Span Text="Sign up" TextColor="DeepSkyBlue" >
                                             <Span.GestureRecognizers>
-                                                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                                                <TapGestureRecognizer Command="{Binding SignupCommand}"/>
                                             </Span.GestureRecognizers>
                                         </Span>
                                     </FormattedString.Spans>
@@ -91,4 +99,4 @@
             </ScrollView>
         </Grid>
     </ContentPage.Content>
-</ContentPage>
+</d:ViewBase>

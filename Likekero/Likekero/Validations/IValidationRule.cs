@@ -4,5 +4,6 @@
     {
         string ValidationMessage { get; set; }
         bool Check(T value);
+        string ReturnError(T value);
     }
 }

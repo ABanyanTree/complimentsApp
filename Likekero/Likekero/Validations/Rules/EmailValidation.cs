@@ -22,5 +22,10 @@ namespace Likekero.Validations.Rules
             var match = regex.Match(str);
             return match.Success;
         }
+
+        public string ReturnError(T value)
+        {
+            return null;
+        }
     }
 }

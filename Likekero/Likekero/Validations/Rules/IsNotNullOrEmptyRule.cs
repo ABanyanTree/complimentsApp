@@ -14,6 +14,11 @@
             var str = value as string;
             return !string.IsNullOrWhiteSpace(str);
         }
+
+        public string ReturnError(T value)
+        {
+            return null;
+        }
     }
 
     public class IsComboboxNotSelected : IValidationRule<int>
@@ -27,6 +32,11 @@
                 return false;
             }
             return true;
+        }
+
+        public string ReturnError(int value)
+        {
+            return null;
         }
     }
 }

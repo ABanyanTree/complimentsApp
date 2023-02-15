@@ -73,5 +73,17 @@ namespace Likekero.Validations
 
             return this.IsValid;
         }
+
+        public bool ValidatePassword()
+        {
+            Errors.Clear();
+
+            var errors = _validations.Select(v => v.ReturnError(Value));
+
+            Errors = errors.ToList().Where(x => x != null)?.ToList();
+            IsValid = !Errors.Any();
+
+            return this.IsValid;
+        }
     }
 }

@@ -1,29 +1,25 @@
-﻿using System;
+﻿using Likekero.Navigation;
 using Likekero.ViewModels.Login;
+using Likekero.Views.Common;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace Likekero.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ForgotPassword : ContentPage
+    public partial class ForgotPassword : ViewBase
     {
-        private SignupViewModel viewModel;
+        private ForgotPasswordViewModel viewModel;
         public ForgotPassword()
         {
             InitializeComponent();
-            BindingContext = viewModel = new SignupViewModel();
+            var navigationService = DependencyService.Get<INavigationService>();
+            BindingContext = viewModel = new ForgotPasswordViewModel(navigationService);
         }
 
         private void Entry_TextChanged(object sender, TextChangedEventArgs e)
         {
             viewModel.Email.Validate();
-            viewModel.Password.Validate();
-        }
-
-        private async void Button_Clicked(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new LoginOtp());
         }
     }
 }

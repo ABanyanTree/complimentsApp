@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Xamarin.Essentials;
 
 namespace Likekero.Views.Common
 {
@@ -15,6 +16,19 @@ namespace Likekero.Views.Common
         public ViewBase()
         {
             InitializeComponent();
+        }
+
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            MessagingCenter.Send(this, "PreventLandscape");
+        }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            MessagingCenter.Send(this, "AllowLandscape");
         }
     }
 }

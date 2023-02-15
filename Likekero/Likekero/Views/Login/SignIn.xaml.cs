@@ -1,33 +1,26 @@
 ﻿using System;
+using Likekero.Navigation;
 using Likekero.ViewModels.Login;
+using Likekero.Views.Common;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace Likekero.Views.Login
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class SignIn : ContentPage
+    public partial class SignIn : ViewBase
     {
-        private SignupViewModel viewModel;
+        private SigninViewModel viewModel;
         public SignIn()
         {
             InitializeComponent();
-            BindingContext = viewModel = new SignupViewModel();
+            var navigationService = DependencyService.Get<INavigationService>();
+            BindingContext = viewModel = new SigninViewModel(navigationService);
         }
         private void Entry_TextChanged(object sender, TextChangedEventArgs e)
         {
             viewModel.Email.Validate();
-            viewModel.Password.Validate();
-        }
-
-        private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new Signup());
-        }
-
-        private async void ForgotPassword_Tapped(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new ForgotPassword());
+            viewModel.Password.ValidatePassword();
         }
     }
 }
